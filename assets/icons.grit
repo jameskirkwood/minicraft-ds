@@ -1,0 +1,14 @@
+# palette
+-p!     # no palette
+
+# graphics
+-g      # include graphics
+-gu16   # u16 array
+-gz!    # no compression
+-gt     # tile format
+-gB2    # 2 bits per pixel
+-gT0000 # black is colour 0
+
+# map
+-m!     # no map
+-mR!    # no tile reduction
