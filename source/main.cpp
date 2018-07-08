@@ -1,5 +1,6 @@
 #include <nds.h>
 #include <iostream>
+#include <iomanip>
 
 #include "Game.h"
 #include "InputHandler.h"
@@ -15,6 +16,7 @@ int main() {
 //-----------------------------------------------------------------------------
   defaultExceptionHandler();
   consoleDemoInit();
+
   game.init();
   while (true) {
     swiWaitForVBlank();
@@ -26,6 +28,11 @@ int main() {
     input.tick();
     game.tick();
 
-    std::cout << cpuEndTiming() * 60 / float(BUS_CLOCK) << std::endl;
+    auto t = cpuEndTiming();
+
+    consoleClear();
+    std::cout << VERSION << std::endl;
+    std::cout << std::setprecision(3) << t * 6000 / float(BUS_CLOCK);
+    std::cout << "% CPU" << std::endl;
   }
 }

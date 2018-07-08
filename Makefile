@@ -10,6 +10,7 @@ GAME_TITLE      := Minicraft DS
 GAME_SUBTITLE1  := A game by Markus Persson
 GAME_SUBTITLE2  := NDS port by James Kirkwood
 GAME_ICON       := assets/icon.bmp
+VERSION         := Minicraft DS (prerelease) 0.1
 #------------------------------------------------------------------------------
 
 TARGET    := MinicraftDS
@@ -17,9 +18,9 @@ SOURCES   := source assets
 BUILD     := build
 
 INCLUDE   := $(foreach dir,$(SOURCES),-I$(dir)) -I$(BUILD)
-CXXFLAGS  := -std=c++17 -Wall -O3
+CXXFLAGS  := -std=c++17 -Wall -O3 -DVERSION='"$(VERSION)"'
 LIBDIRS   := $(CUSTARD)
-LIBS      := -lcustard -lfat
+LIBS      := -lcustard
 
 include $(CUSTARD)/custard.mk
 
@@ -32,14 +33,14 @@ SFILES    := $(shell find $(SOURCES) -name '*.s')
 PNGFILES  := $(shell find $(SOURCES) -name '*.png')
 WAVFILES  := $(shell find $(SOURCES) -name '*.wav')
 
-HOUTPUTS  := $(addprefix $(BUILD)/,$(PNGFILES:.png=.h))
-HOUTPUTS  += $(addprefix $(BUILD)/,$(WAVFILES:%.wav=%_wav.h))
+HOUTPUTS  := $(PNGFILES:%.png=$(BUILD)/%.h)
+HOUTPUTS  += $(WAVFILES:%.wav=$(BUILD)/%_wav.h)
 
-SFILES    += $(addprefix $(BUILD)/,$(PNGFILES:.png=.s))
+SFILES    += $(PNGFILES:%.png=$(BUILD)/%.s)
 
-OFILES    := $(addprefix $(BUILD)/,$(WAVFILES:%=%.o))
-OFILES    += $(addprefix $(BUILD)/,$(CPPFILES:.cpp=.o))
-OFILES    += $(addprefix $(BUILD)/,$(SFILES:.s=.o))
+OFILES    := $(WAVFILES:%=$(BUILD)/%.o)
+OFILES    += $(CPPFILES:%.cpp=$(BUILD)/%.o)
+OFILES    += $(SFILES:%.s=$(BUILD)/%.o)
 
 #------------------------------------------------------------------------------
 # targets

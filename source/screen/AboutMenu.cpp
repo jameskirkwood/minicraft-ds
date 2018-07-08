@@ -26,24 +26,27 @@ void AboutMenu::render() {
     body_font.draw(lines[i], gfx::display.gui_layer, 0, 3 + i);
   }
 
-  bold_font.draw("Thank you, Mr Persson, for", gfx::display.gui_layer, 2, 20);
-  bold_font.draw("creating Minicraft.", gfx::display.gui_layer, 6, 21);
+  bold_font.draw("Thank you, Notch, for", gfx::display.gui_layer, 5, 21);
+  bold_font.draw("creating Minicraft.", gfx::display.gui_layer, 6, 22);
 }
 
 const char *AboutMenu::lines[] = {
-  "The original \"Minicraft\" was",
+  "The original Minicraft was",
   "developed by Markus \"Notch\"",
   "Persson for the 22nd Ludum Dare",
   "game programming competition",
   "in December 2011.",
   "",
-  "\"Minicraft DS\" was developed by",
-  "James Kirkwood using libnds for",
-  "fun and education.",
+  "Minicraft DS is my ongoing eff-",
+  "ort to port Notch's \"Minicraft\"",
+  "for Nintendo DS using devkitPro",
+  "+ libnds for fun and education.",
   "",
-  "It is based on Notch's original",
-  "Java source code, which was",
-  "made available in compliance",
-  "with the competition rules.",
+  "For more information, visit:",
+  "https://github.com/jameskirkwoo",
+  "d/minicraft-ds",
+  "",
+  VERSION,
+  "THIS IS A WORK IN PROGRESS!",
   0
 };
